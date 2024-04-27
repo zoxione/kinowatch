@@ -15,7 +15,7 @@ export default async function Page({ searchParams }: PageProps) {
   const queryMovies = queryReturn.results || []
 
   return (
-    <main className="container flex-1 space-y-8 py-4">
+    <main className="container flex-1 space-y-8 py-8">
       <MovieSearch />
       {queryMovies.length === 0 || query === "" ? (
         <div className="flex flex-col items-center justify-center">

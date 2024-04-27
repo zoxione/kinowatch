@@ -44,7 +44,7 @@ export default async function Page({ params }: PageProps) {
   }
 
   return (
-    <main className="container flex-1 space-y-8 py-4">
+    <main className="container flex-1 space-y-8 py-8">
       <div className="relative h-96 overflow-hidden">
         <Image
           src={movie.cover}
@@ -57,7 +57,7 @@ export default async function Page({ params }: PageProps) {
         <div className="flex flex-col sm:flex-row items-start sm:items-center sm:justify-between gap-1">
           <h1 className="text-4xl font-extrabold tracking-tight lg:text-5xl">{movie.title}</h1>
           <Badge variant="default" className="text-xl">
-            {movie.rating ? movie.rating : "—"}
+            {movie.rating ? movie.rating : "NR"}
           </Badge>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -77,19 +77,45 @@ export default async function Page({ params }: PageProps) {
           ))}
         </div>
       </div>
-      <div className="border rounded-md p-4">
-        <ul>
-          {movie.casts.map((cast) => (
-            <li key={cast}>{cast}</li>
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <h1 className="text-xl font-semibold tracking-tight">Casts</h1>
+          <Badge>{movie.casts.length}</Badge>
+        </div>
+        <div className="border rounded-md p-4">
+          <ul>
+            {movie.casts.map((cast) => (
+              <li key={cast}>{cast}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <h1 className="text-xl font-semibold tracking-tight">Episodes</h1>
+          <Badge>{movie.episodes.length}</Badge>
+        </div>
+        <div className="border rounded-md p-4">
+          {movie.episodes.map((episode) => (
+            <div key={episode.id} className="flex items-center gap-2">
+              {episode.season && episode.number ? (
+                <Badge>
+                  {episode.season}:{episode.number}
+                </Badge>
+              ) : (
+                <Badge>
+                  {0}:{0}
+                </Badge>
+              )}
+              {episode.title}
+            </div>
           ))}
-        </ul>
+        </div>
       </div>
       <div className="space-y-3">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <h1 className="text-xl font-semibold tracking-tight">Recommendations</h1>
-            <Badge>{movie.recommendations.length}</Badge>
-          </div>
+        <div className="flex items-center gap-2">
+          <h1 className="text-xl font-semibold tracking-tight">Recommendations</h1>
+          <Badge>{movie.recommendations.length}</Badge>
         </div>
         <MovieList
           movies={movie.recommendations.map((item) => ({

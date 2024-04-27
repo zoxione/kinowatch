@@ -15,9 +15,18 @@ type MovieFullInfo = {
   duration: string
   rating: string
   recommendations: Pick<MovieFullInfo, "id" | "title" | "image" | "duration" | "type">[]
+  episodes: Episode[]
 }
 
 type MovieShortInfo = Pick<MovieFullInfo, "id" | "title" | "url" | "image" | "releaseDate" | "duration" | "type">
+
+type Episode = {
+  id: string
+  title: string
+  number: number
+  season: number
+  url: string
+}
 
 type GetAllTrendingReturn = {
   results: MovieShortInfo[]
